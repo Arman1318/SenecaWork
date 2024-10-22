@@ -1,13 +1,18 @@
 const express = require('express');
 const app = express();
 
-// With the help of Root route my name will be displayed with the current GMT.
+// Root route that displays your name, course, and the current GMT
 app.get('/', (req, res) => {
-  const currentGMT = new Date().toUTCString();  // Get the current time in GMT/UTC string format
-  res.send(`<h1>Arman Dodhiya - WEB322 - ${currentGMT}</h1>`);  // Replace 'Your Name' with your actual name
+  const currentGMT = new Date().toISOString(); // Fetch current GMT time
+  res.send(`<h1>Arman Dodhiya - WEB322 - ${currentGMT}</h1>`);
 });
 
-// the server is set on port 3000
+// Additional route to confirm app is running
+app.get('/status', (req, res) => {
+  res.send('Your App is Running!');
+});
+
+// Start the server on port 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
